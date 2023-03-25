@@ -3,7 +3,10 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar';
+import Admin from './Pages/Admin';
 import CarBooking from './Pages/CarBooking';
+import AddCarDetails from './Pages/AddCarDetails';
+
 
 function App() {
   return (
@@ -15,6 +18,8 @@ function App() {
           <Routes>
             <Route path="/" />
             <Route path="/CarBooking" element={<CarBooking/>}></Route>
+            <Route path="/admin" element={<Admin/>}/>
+            <Route path="/addcar" element={<AddCarDetails/>}/>
           </Routes>
         </div>
 
