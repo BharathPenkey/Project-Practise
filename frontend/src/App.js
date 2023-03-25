@@ -1,12 +1,21 @@
-import logo from './logo.svg';
+
 import './App.css';
-import Collaborate from './Collaborate';
-import Admin from './Pages/admin';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <Collaborate/>,
-    <Admin/>
+    <div className="App">
+    <BrowserRouter>
+    <Navbar/>
+    <div className="pages">
+      <Routes>
+        <Route path="/" />
+      </Routes>
+    </div>
+    </BrowserRouter>
+  </div>
   );
 
 }
