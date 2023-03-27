@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Link} from 'react-router-dom';
-import { useLogin } from '../hooks/useLogin';
+import { useAdmin } from '../hooks/useAdmin';
 import '../Styles/Form.css'
 
 
 export  function Form() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {login, isLoading , error} = useLogin()
+    const {admin, isLoading , error} = useAdmin()
 
 
     const handleSubmit = async (e) => {
       e.preventDefault()
-      await login(email, password)
+      await admin(email, password)
     }
 
   return (
