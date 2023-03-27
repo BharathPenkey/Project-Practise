@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 
 const CarBooking = () => {
     return (
-        <div>
+        <div className='main-container'>
             {/* <Header /> */}
             {/* <hr /> */}
             <h5> Origin namee &gt; Destination namee &gt; 12 june-2019  -  13-june-2019 <button className='modify-btn'><span>Modify</span></button> </h5>
-            <hr />
+
 
             <section className='thirdNavbar'>
 
@@ -37,11 +37,10 @@ const CarBooking = () => {
                 
 
             </section>
-            <hr />
             
 
 
-            <section style={{ width: "100vw" }}>
+            <section style={{ width: "100%" }} className='big-container'>
 
                 {
                     data.map((item, index) => {

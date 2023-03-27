@@ -1,31 +1,39 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
     const [error, setError] = useState(null)
     const [isloading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
+    const navigate = useNavigate()
 
     const signup = async (email, password) => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/user/signup', {
+        const response = await fetch('/carRental/user/signup', {
             method : 'POST',
             headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify({email, password})//body m jo pass kr rhe h use json m to change krna pdega na
+            body : JSON.stringify({email, password})
         })
-        const json = await response.json();//yha json se object mil rha h
+
+
+        const json = await response.json();
+
+
 
         if(!response.ok){
             setIsLoading(false)
             setError(json.error)
         }
+
+        
         if(response.ok){
             //save the user in localstorage
-            localStorage.setItem('user', JSON.stringify(json))//(item name to store, converting into json)
-            //kyuki hmne controllers me signup m email or tokan send kr rhe h
-
+            localStorage.setItem('user', JSON.stringify(json))
+            navigate('/CarBooking')
+           
             //update the auth context
             dispatch({type: 'LOGIN', payload : json})
 

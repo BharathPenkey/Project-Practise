@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import { useLogin } from '../hooks/useLogin';
 import '../Styles/Form.css'
 
 
 export  function Form() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+    const {login, isLoading , error} = useLogin()
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      await login(email, password)
+    }
+
   return (
-    <form className='login'>
+    <form className='login' onSubmit={handleSubmit}>
 
        <h3>Sign in your account</h3>
 
@@ -24,7 +32,8 @@ export  function Form() {
        
        <span>forgot password?</span>
        <div className='createAccount'><Link to='/signup'>create account</Link></div>
-        <button>Login</button>
+       <button disabled={isLoading}>Login</button>
+        {error && <div className='error'>{error}</div>}
     </form>
   )
 }
@@ -39,7 +48,7 @@ export  function Login() {
             <div className='links'>
                 <Link to='/signup'>Register</Link> &nbsp; &nbsp; &nbsp;
 
-                <Link to='/admin'>Admin User</Link>
+                <Link to='/adminLogin'>Admin User</Link>
             </div>
         </div>
         <div className='form'><Form/></div>

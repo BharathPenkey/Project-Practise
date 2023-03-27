@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignup } from '../hooks/useSignup';
 import '../Styles/Form.css'
 
 
@@ -9,9 +10,18 @@ export  function Form() {
     const [name, setName] = useState('')
     const [contact, setContact] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
+    const {signup, isloading, error} = useSignup()
+ 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        
+        await signup(email, password)
+
+    }
     
   return (
-    <form className='login'>
+    <form className='login'  onSubmit={handleSubmit}>
 
        <h3>Register in your account</h3>
 
@@ -41,7 +51,8 @@ export  function Form() {
         placeholder='confirm password'/>
         
         <div><Link to='/'>Signin</Link></div>
-        <button>Register</button>
+        <button disabled={isloading}>Register</button>
+        {error && <div className='error'>{error}</div>}
     </form>
   )
 }
