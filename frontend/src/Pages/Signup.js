@@ -1,29 +1,51 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useSignup } from '../hooks/useSignup';
 import '../Styles/Form.css'
 
+ 
 
+//Form things
 export  function Form() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('')
     const [contact, setContact] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
+    const [error1 , setError1] = useState('')
     const {signup, isloading, error} = useSignup()
  
-
+    
+    // HandleSubmit For submit the form 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+
+        //Checking some Validations
+        if(!contact){setError1('All fields are mandatory');return}
+        if(password !== confirmPassword){
+          setError1("Passwords doesn't match")
+          return
+        }
         
+
+        //After checking validation then and only then user can signup
         await signup(email, password)
 
     }
     
+
+
   return (
+
+    //Signup Form
     <form className='login'  onSubmit={handleSubmit}>
 
        <h3>Register in your account</h3>
+       
+       
+       {error1 && <div className='error'>{error1}</div>}
+       {error && <div className='error'>{error}</div>}
 
        <input type='text'
         onChange={(e) => setName(e.target.value)}
@@ -52,12 +74,14 @@ export  function Form() {
         
         <div><Link to='/'>Signin</Link></div>
         <button disabled={isloading}>Register</button>
-        {error && <div className='error'>{error}</div>}
+        
     </form>
   )
 }
 
+ 
 
+//Signup page
 export  function Signup() {
   return (
     <div className='background'>
