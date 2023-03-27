@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Admin from './Pages/Admin';
 import CarBooking from './Pages/CarBooking';
-import AddCarDetails from './Pages/AddCarDetails';
+
 
 
 function App() {
@@ -16,7 +16,9 @@ function App() {
 
         <div className="pages">
           <Routes>
-            <Route path="/" />
+            <Route path="/" element={<Login/>}/>
+            <Route path='/signup' element={<Signup/>}/>
+            <Route path='/adminLogin' element={<AdminLogin/>}/>
             <Route path="/CarBooking" element={<CarBooking/>}></Route>
             <Route path="/admin" element={<Admin/>}/>
             <Route path="/addcar" element={<AddCarDetails/>}/>
